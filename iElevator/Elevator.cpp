@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Elevator::Elevator() : p_currentfloor(0), p_gotofloor(0), p_status(ELEVATOR_OFF), p_movement(STOPPED), p_door(OPENED) {
+Elevator::Elevator() : p_currentfloor(0), p_gotofloor(0), p_status(ELEVATOR_OFF), p_movement(STOPPED), p_door(OPENED), p_base(0) {
     Elevator_counter++;
     p_index = Elevator_counter;
 }
@@ -89,6 +89,15 @@ void Elevator::engine() {
                 break;
         }
     }
+}
+
+int Elevator::base() {
+    return p_base;
+}
+
+int Elevator::base(int floor) {
+    p_base = floor;
+    return p_base;
 }
 
 int Elevator::Elevator_counter = 0;

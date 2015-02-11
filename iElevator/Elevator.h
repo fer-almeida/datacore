@@ -29,6 +29,8 @@ public:
     Status status();
     Movement movement();
     Door door();
+    int base();
+    int base(int floor);
     
     // Methods
     int on();
@@ -44,6 +46,7 @@ private:
     Status p_status;
     Movement p_movement;
     Door p_door;
+    int p_base;
     
     void engine();
 };

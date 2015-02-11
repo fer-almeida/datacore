@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Elevator.h"
+#include "Building.h"
 
 void elevatorstatus(Elevator *elevator);
 
@@ -17,31 +18,61 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+    int from = 0;
+    int to = 0;
+    
     Elevator elevator1;
     Elevator elevator2;
-    
     elevatorstatus(&elevator1);
     elevatorstatus(&elevator2);
     
     elevator1.on();
     elevator2.on();
+    elevator1.base(4);
+    elevator2.base(0);
+    
+    while(1) {
+        /*
+        cout << "Where are you now? ";
+        cin >> from;
+        cout << "Where are you going? ";
+        cin >> to;
+        
+        if(from == to) {
+            cout << "You are already on " << to << endl;
+            continue;
+        }
+        else
+            cout << "From " << from << " To " << to << endl;
+                
+        if(elevator1.currentfloor() == from) {
+            elevator1.gotofloor(to);
+            while(elevator1.currentfloor() != to) {
+                cout << "E#" << elevator1.index() << "F" << elevator1.currentfloor() << "\r";
+            }
+            
+            cout << endl;
+        } else {
+            elevator1.gotofloor(from);
+            while(elevator1.currentfloor() != from) {
+                cout << "E#" << elevator1.index() << "F" << elevator1.currentfloor() << "\r";
+            }
+            
+            elevatorstatus(&elevator1);
+            
+            elevator1.gotofloor(to);
+            while(elevator1.currentfloor() != to) {
+                cout << "E#" << elevator1.index() << "F" << elevator1.currentfloor() << "\r";
+            }
+            
+            cout << endl;
+        }
+         */
+        
+        elevatorstatus(&elevator1);
+        elevatorstatus(&elevator2);
+    }
 
-    elevator1.gotofloor(5);
-    elevator2.gotofloor(3);
-    
-    while(elevator1.currentfloor() < 5) {
-        cout << "1 - F" << elevator1.currentfloor() << " 2 - F" << elevator2.currentfloor() << "\r";
-    }
-    cout << "1 - F" << elevator1.currentfloor() << " 2 - F" << elevator2.currentfloor() << "\r";
-    cout << endl;
-    
-    elevator1.gotofloor(0);
-    while(elevator1.currentfloor() > 0) {
-        cout << "1 - F" << elevator1.currentfloor() << " 2 - F" << elevator2.currentfloor() << "\r";
-    }
-    cout << "1 - F" << elevator1.currentfloor() << " 2 - F" << elevator2.currentfloor() << "\r";
-    cout << endl;
-    
     elevator1.off();
     elevator2.off();
 
@@ -49,18 +80,7 @@ int main(int argc, char** argv) {
 }
 
 void elevatorstatus(Elevator *elevator) {
-    cout << "\nElevator #" << elevator->index() << endl;
-    cout << "Current Floor: " << elevator->currentfloor() << endl;
-    cout << "Status: " << (elevator->status() == ELEVATOR_ON ? "On" : "Off") << endl;
-    cout << "Movement: " << (elevator->movement() == GOING_UP ? "Going Up" : (elevator->movement() == STOPPED ? "Stopped" : "Going Down")) << endl;
-    cout << "Door: " << (elevator->door() == OPENED ? "Opened" : "Closed") << endl;
-    
-    return;
-}
-
-void draw(){
-    cout << "===========================";
-    cout << "|                         |";
+    cout << "\rE#" << elevator->index() << " | Current Floor: " << elevator->currentfloor() << " | Status: " << (elevator->status() == ELEVATOR_ON ? "On" : "Off") << " | Movement: " << (elevator->movement() == GOING_UP ? "Going Up" : (elevator->movement() == STOPPED ? "Stopped" : "Going Down")) << " | Door: " << (elevator->door() == OPENED ? "Opened" : "Closed") << " | Base: " << elevator->base() << "\r";
     
     return;
 }
